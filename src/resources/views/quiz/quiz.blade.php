@@ -7,18 +7,18 @@
   <title>quiz</title>
 </head>
 <body>
-  <h1>{{ $quiz_title }}</h1>
+  <h1>{{ $quiz_title[$big_question_index] }}</h1>
   <div>
     @foreach($question_list[$big_question_index] as $question)
     <div>
       <h1>{{ $loop->index + 1 }}. この地名はなんて読む？</h1>
       <ul>
-        @foreach($choices[$big_question_index] as $choice)
-        <li>{{ $choice[$loop->index] }}</li>
+        @foreach($question as $choice)
+        <li>{{ $choice }}</li>
         @endforeach
         <li>
           <span>正解！</span><br>
-          <span>正解は「{{  }}」</span>
+          <span>正解は「たかなわ」です</span>
         </li>
       </ul>
     </div>
