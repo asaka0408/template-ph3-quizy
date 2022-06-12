@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('quiz', function () {
+    return view('quiz.quiz_list');
+});
+
+Route::get('quiz/{big_question_index}', 'QuizController@quiz_list');
+
