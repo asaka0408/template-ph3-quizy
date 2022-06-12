@@ -13,7 +13,13 @@
     <div>
       <h1>{{ $loop->index + 1 }}. この地名はなんて読む？</h1>
       <ul>
-       @foreach($question)
+        @foreach($choices[$big_question_index] as $choice)
+        <li>{{ $choice[$loop->index] }}</li>
+        @endforeach
+        <li>
+          <span>正解！</span><br>
+          <span>正解は「{{  }}」</span>
+        </li>
       </ul>
     </div>
     @endforeach

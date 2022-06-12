@@ -9,7 +9,12 @@ class QuizController extends Controller
     public function quiz_list($big_question_index)
     // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
     {
-        $question_list = [
+
+        $questions=[
+
+        ];
+
+        $choices=[
             1=>[
               // １ならこれ
                 1=>['こうわ', 'たかなわ', 'たかわ'],
