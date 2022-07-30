@@ -14,10 +14,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // localhost/quizって入れられてたら、このビューを返す
 Route::get('quiz', function () {
     return view('quiz.quiz_list');
