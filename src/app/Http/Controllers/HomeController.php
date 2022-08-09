@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Prefecture;
+use App\Question;
 
 class HomeController extends Controller
 {
@@ -21,8 +23,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
     public function index()
+    // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
     {
-        return view('home');
+      $prefectures = Prefecture::get();
+      $questions = Question::with("choices")->get();
+      return view('home', ['prefectures' => $prefectures],['questions' => $questions]);
     }
 }
