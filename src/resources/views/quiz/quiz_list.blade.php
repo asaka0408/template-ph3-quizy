@@ -1,2 +1,3 @@
-<a href="quiz/1">東京</a>
-<a href="quiz/2">広島</a>
+@foreach($prefectures as $prefecture)
+<a href="{{route('quiz', ['id' => $loop->iteration])}}">{{$prefecture->name}}</a>
+@endforeach

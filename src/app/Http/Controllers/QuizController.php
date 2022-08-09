@@ -1,36 +1,29 @@
 <?php 
 namespace App\Http\Controllers;
 
+use App\Prefecture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Question;
 
 class QuizController extends Controller
 // ルートで指定している、＠より前の部分の名前
 {
-    public function quiz_list($big_question_index)
+    public function index(Request $request)
+    {
+      $prefectures = Prefecture::get();
+      return view('quiz.quiz_list', ['prefectures' => $prefectures]);
+    }
+
+    public function quiz_contents(Request $request)
     // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
     {
-        $question_list = [
-            1=>[
-              // １ならこれ
-                1=>['こうわ', 'たかなわ', 'たかわ'],
-                2=>['かめど', 'かめと', 'かめいど'],
-                3=>['こうじまち', 'おかとまち', 'かゆまち']
-            ],
-            2=>[
-              // ２ならこれ
-                1=>['むこうひら', 'むかいなだ', 'むきひら'],
-                2=>['みよし', 'おしらべ', 'みつぎ'],
-                3=>['きやま', 'かなやま', 'ぎんざん']
-            ],
-        ];
-        $quiz_title=[
-          // １と２それぞれの分岐
-            1=>'東京の難読地名クイズ',
-            2=>'広島県の難読地名クイズ'
-        ];
-
-        // dd($big_question_index);
-        return view ('quiz.quiz',compact('question_list','big_question_index','quiz_title'));
-        // ここの変数を、viewでも使えるようにしたい
+      $id = $request->id;
+      $prefecture = Prefecture::find($id);
+      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+      // _φ(･_･モデルって1個取り出してきて、この子の性質は？って感じだから、単数形
+      // 集合ではなく、単体の性質
+      // withの中にある変数はモデルの関数名
+      return view('quiz.quiz', ['prefecture' => $prefecture],['questions' => $questions]);
     }
 }
