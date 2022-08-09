@@ -23,3 +23,7 @@ Route::get('quiz/{id}', 'QuizController@quiz_contents')->name('quiz');
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
