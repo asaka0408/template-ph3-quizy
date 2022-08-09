@@ -14,15 +14,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 
+// localhost/quizって入れられてたら、このビューを返す
+Route::get('quiz', 'QuizController@index');
+
+//localhost/quizy/1か2って入れられたら、コントローラーに飛ぶ
+Route::get('quiz/{id}', 'QuizController@quiz_contents')->name('quiz');
+
 Route::get('/', function () {
     return view('welcome');
 });
-
-// localhost/quizって入れられてたら、このビューを返す
-Route::get('quiz', function () {
-    return view('quiz.quiz_list');
-});
-
-//localhost/quizy/1か2って入れられたら、コントローラーに飛ぶ
-Route::get('quiz/{big_question_index}', 'QuizController@quiz_list');
-
