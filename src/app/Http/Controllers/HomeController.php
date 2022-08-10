@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Prefecture;
 use App\Question;
+use Illuminate\Foundation\Console\Presets\React;
 
 class HomeController extends Controller
 {
@@ -32,6 +33,7 @@ class HomeController extends Controller
         $questions = Question::with("choices")->get();
         return view('home', ['prefectures' => $prefectures], ['questions' => $questions]);
     }
+
     // ■追加
     public function prefecture_add()
     {
@@ -46,6 +48,7 @@ class HomeController extends Controller
         $prefecture->fill($form)->save();
         return view('prefecture_add', ['msg' => '正しく入力されました！']);
     }
+
     // ■編集
     public function prefecture_edit(Request $request)
     {
@@ -62,17 +65,27 @@ class HomeController extends Controller
         $prefecture->fill($form)->save();
         return redirect('/home');
     }
+
     // ■削除
-    public function prefecture_delete()
+    public function prefecture_delete(Request $request)
     {
-        return view('prefecture_delete');
+        $id = $request->id;
+        $prefecture = Prefecture::find($id);
+        return view('prefecture_delete', ['form' => $prefecture]);
     }
+    public function prefecture_remove(Request $request)
+    {
+        Prefecture::find($request->id)->delete();
+        return redirect('/home');
+    }
+
     // ■順序変更
     public function order()
     {
         $prefectures = Prefecture::get();
         return view('prefecture_order_change', ['prefectures' => $prefectures]);
     }
+
 
     // 【設問】
     // ■一覧
@@ -83,6 +96,8 @@ class HomeController extends Controller
         $questions = Question::where('prefecture_id', $id)->with("choices")->get();
         return view('question', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
+
+    // ■追加
     public function question_add(Request $request)
     {
         $id = $request->id;
@@ -90,6 +105,8 @@ class HomeController extends Controller
         $questions = Question::where('prefecture_id', $id)->with("choices")->get();
         return view('question_add', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
+
+    // ■編集
     public function question_edit(Request $request)
     {
         $id = $request->id;
@@ -97,6 +114,8 @@ class HomeController extends Controller
         $questions = Question::where('prefecture_id', $id)->with("choices")->get();
         return view('question_edit', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
+
+    // ■削除
     public function question_delete(Request $request)
     {
         $id = $request->id;

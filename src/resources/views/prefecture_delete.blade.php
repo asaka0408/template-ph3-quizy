@@ -1,8 +1,10 @@
 <h1>大問削除</h1>
 
-<p>選択した都道府県 を本当に削除しますか？</p>
-{{-- 選択した内容が反映されるようにパラメータを設置 --}}
-<form action="submit">
-  <button>削除</button>
-  <button>キャンセル</button>
+<p>以下の大問を本当に削除しますか？</p>
+<form action="/home/prefecture/delete/{{$form->id}}" method="POST">
+  @csrf
+  <input type="hidden" name="id" value="{{$form->id}}">
+  <p>{{$form->name}}</p>
+  <input type="submit" value="削除">
 </form>
+<a href="{{route('home')}}">キャンセル</a>
