@@ -44,7 +44,7 @@ Route::post('/home/prefecture/delete/{id}','HomeController@prefecture_remove');
 Route::get('/home/prefecture/order_change', 'HomeController@order')->name('prefecture_order_change');
 
 // ■設問一覧
-Route::get('/home/question', 'HomeController@question')->name('question');
+Route::get('/home/question/{id}', 'HomeController@question')->name('question');
 // ■設問追加
 Route::get('/home/question_add', 'HomeController@question_add')->name('question_add');
 // ■設問編集
