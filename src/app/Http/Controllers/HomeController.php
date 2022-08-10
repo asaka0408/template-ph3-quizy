@@ -24,50 +24,73 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-// 【大問】
-//  ■一覧
+    // 【大問】
+    //  ■一覧
     public function index()
     {
         $prefectures = Prefecture::get();
         $questions = Question::with("choices")->get();
         return view('home', ['prefectures' => $prefectures], ['questions' => $questions]);
     }
-// 順序変更
+    // ■追加
+    public function prefecture_add()
+    {
+        return view('prefecture_add', ['msg' => 'フォームを入力']);
+    }
+    public function prefecture_add_post(Request $request)
+    {
+        $this->validate($request, Prefecture::$rules);
+        $prefecture = new Prefecture;
+        $form = $request->all();
+        unset($form['_token']);
+        $prefecture->fill($form)->save();
+        return view('prefecture_add', ['msg' => '正しく入力されました！']);
+    }
+    // ■編集
+    public function prefecture_edit()
+    {
+        return view('prefecture_edit');
+    }
+    // ■削除
+    public function prefecture_delete()
+    {
+        return view('prefecture_delete');
+    }
+    // ■順序変更
     public function order()
     {
         $prefectures = Prefecture::get();
         return view('prefecture_order_change', ['prefectures' => $prefectures]);
     }
 
-// 【設問】
-// ■一覧
+    // 【設問】
+    // ■一覧
     public function question(Request $request)
     {
-      $id = $request->id;
-      $prefecture = Prefecture::find($id);
-      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
-      return view('question', ['prefecture' => $prefecture],['questions' => $questions]);
+        $id = $request->id;
+        $prefecture = Prefecture::find($id);
+        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        return view('question', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
     public function question_add(Request $request)
     {
-      $id = $request->id;
-      $prefecture = Prefecture::find($id);
-      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
-      return view('question_add', ['prefecture' => $prefecture],['questions' => $questions]);
+        $id = $request->id;
+        $prefecture = Prefecture::find($id);
+        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        return view('question_add', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
     public function question_edit(Request $request)
     {
-      $id = $request->id;
-      $prefecture = Prefecture::find($id);
-      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
-      return view('question_edit', ['prefecture' => $prefecture],['questions' => $questions]);
+        $id = $request->id;
+        $prefecture = Prefecture::find($id);
+        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        return view('question_edit', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
     public function question_delete(Request $request)
     {
-      $id = $request->id;
-      $prefecture = Prefecture::find($id);
-      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
-      return view('question_delete', ['prefecture' => $prefecture],['questions' => $questions]);
+        $id = $request->id;
+        $prefecture = Prefecture::find($id);
+        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        return view('question_delete', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
-    
 }
