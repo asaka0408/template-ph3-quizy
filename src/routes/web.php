@@ -35,7 +35,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/prefecture/add', 'HomeController@prefecture_add')->name('prefecture_add');
 Route::post('/home/prefecture/add', 'HomeController@prefecture_add_post')->name('prefecture_add');
 // ■大問編集
-Route::get('/home/prefecture/edit', 'HomeController@prefecture_edit')->name('prefecture_edit');
+Route::get('/home/prefecture/edit/{id}', 'HomeController@prefecture_edit')->name('prefecture_edit');
+Route::post('/home/prefecture/edit/{id}', 'HomeController@prefecture_update');
 // ■大問削除
 Route::get('/home/prefecture/delete','HomeController@prefecture_delete')->name('prefecture_delete');
 // ■大問順番変更

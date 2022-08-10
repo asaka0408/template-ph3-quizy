@@ -8,7 +8,7 @@
       </ul>
     </div>
 @endif
-<form action="/home/prefecture">
+<form action="/home">
   <input type="hidden" name="id" value="{{$form->id}}">
     <p>画像のアップロード</p>
     <input type="file">

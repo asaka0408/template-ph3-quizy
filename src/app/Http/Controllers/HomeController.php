@@ -47,9 +47,20 @@ class HomeController extends Controller
         return view('prefecture_add', ['msg' => '正しく入力されました！']);
     }
     // ■編集
-    public function prefecture_edit()
+    public function prefecture_edit(Request $request)
     {
-        return view('prefecture_edit');
+        $id = $request->id;
+        $prefecture = Prefecture::find($request->id);
+        return view('prefecture_edit', ['form' => $prefecture]);
+    }
+    public function prefecture_update(Request $request)
+    {
+        $this->validate($request, Prefecture::$rules);
+        $prefecture = Prefecture::find($request->id);
+        $form = $request->all();
+        unset($form['_token']);
+        $prefecture->fill($form)->save();
+        return redirect('/home');
     }
     // ■削除
     public function prefecture_delete()
