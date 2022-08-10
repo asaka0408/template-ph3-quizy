@@ -7,3 +7,5 @@
   @endforeach
   <a href="{{ route('prefecture_add') }}">大問追加</a>
   <a href="{{ route('prefecture_order_change') }}">並び順変更</a>
+
+  全体的にパラメータを設置して、該当する都道府県の内容が表示されるように変更
