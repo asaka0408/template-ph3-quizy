@@ -27,8 +27,21 @@ class HomeController extends Controller
     public function index()
     // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
     {
-      $prefectures = Prefecture::get();
-      $questions = Question::with("choices")->get();
-      return view('home', ['prefectures' => $prefectures],['questions' => $questions]);
+        $prefectures = Prefecture::get();
+        $questions = Question::with("choices")->get();
+        return view('home', ['prefectures' => $prefectures], ['questions' => $questions]);
+    }
+
+    public function question()
+    {
+        $prefectures = Prefecture::get();
+        $questions = Question::with("choices")->get();
+        return view('question', ['prefectures' => $prefectures], ['questions' => $questions]);
+    }
+
+    public function order()
+    {
+        $prefectures = Prefecture::get();
+        return view('prefecture_order_change', ['prefectures' => $prefectures]);
     }
 }
