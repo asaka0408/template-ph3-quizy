@@ -17,6 +17,7 @@ class CreateQuizyTable extends Migration
     {
         Schema::create('prefectures', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('order');
             $table->string('name');
             $table->timestamps();
         });

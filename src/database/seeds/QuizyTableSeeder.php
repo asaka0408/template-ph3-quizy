@@ -13,8 +13,14 @@ class QuizyTableSeeder extends Seeder
     public function run()
     {
         $params = [
-          [ 'name' => '東京の難読地名クイズ'],
-          [ 'name' => '広島の難読地名クイズ'],
+          [ 
+            'name' => '東京の難読地名クイズ',
+            'order' => 1,
+          ],
+          [ 
+            'name' => '広島の難読地名クイズ',
+            'order' => 2,
+          ],
         ];
         foreach($params as $param) {
           DB::table('prefectures')->insert($param);
