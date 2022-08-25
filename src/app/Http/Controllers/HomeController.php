@@ -54,7 +54,7 @@ class HomeController extends Controller
     {
         $id = $request->id;
         $prefecture = Prefecture::find($request->id);
-        return view('prefecture_edit', ['form' => $prefecture]);
+        return view('prefecture_edit', ['prefecture' => $prefecture]);
     }
     public function prefecture_update(Request $request)
     {
@@ -71,7 +71,7 @@ class HomeController extends Controller
     {
         $id = $request->id;
         $prefecture = Prefecture::find($id);
-        return view('prefecture_delete', ['form' => $prefecture]);
+        return view('prefecture_delete', ['prefecture' => $prefecture]);
     }
     public function prefecture_remove(Request $request)
     {

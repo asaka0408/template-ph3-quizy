@@ -1,15 +1,15 @@
 <h1>設問追加</h1>
-@if (count($errors)>0)
+@if (count($errors) > 0)
     <div>
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{$error}}</li>
-        @endforeach
-      </ul>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
     </div>
 @endif
-<form action="/home">
-  <input type="hidden" name="id" value="{{$form->id}}">
+<form action="/home" method="POST">
+    <input type="hidden" name="id" value="{{ $form->id }}">
     <p>画像のアップロード</p>
     <input type="file">
     <p>選択肢の追加<br>※正解のものにチェックを入れてください</p>
