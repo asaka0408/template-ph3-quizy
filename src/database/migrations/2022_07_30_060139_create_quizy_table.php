@@ -25,6 +25,7 @@ class CreateQuizyTable extends Migration
             // 問題番号に対応させる
             $table->bigIncrements('id');
             $table->integer('prefecture_id');
+            $table->integer('order');
             $table->string('name');
             $table->string('image');
             $table->timestamps();
