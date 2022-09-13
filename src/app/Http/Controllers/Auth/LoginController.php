@@ -40,4 +40,10 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function admin()
+    // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
+    {
+      
+    }
 }
