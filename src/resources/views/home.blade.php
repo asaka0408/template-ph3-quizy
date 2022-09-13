@@ -1,8 +1,8 @@
   <h2>登録済み大問一覧</h2>
   @foreach ($prefectures as $prefecture)
-      <a href="{{ route('question', ['id' => $loop->iteration])}}">{{ $prefecture->name }}</a>
-      <a href="{{ route('prefecture_edit', ['id' => $loop->iteration]) }}">編集</a>
-      <a href="{{ route('prefecture_delete', ['id' => $loop->iteration]) }}">削除</a>
+      <a href="{{ route('question')}}">{{ $prefecture->name }}</a>
+      <a href="{{ route('prefecture_edit', ['id' => $prefecture->id]) }}">編集</a>
+      <a href="{{ route('prefecture_delete', ['id' => $prefecture->id]) }}">削除</a>
       <br>
   @endforeach
   <a href="{{ route('prefecture_add') }}">大問追加</a>

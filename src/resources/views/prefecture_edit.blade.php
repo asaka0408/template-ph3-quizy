@@ -8,10 +8,10 @@
       </ul>
     </div>
 @endif
-<form action="/home/prefecture/edit/{{$form->id}}" method="POST">
+<form action="/home/prefecture/edit/{{$prefecture->id}}" method="POST">
   @csrf
-  <input type="hidden" name="id" value="{{$form->id}}">
-  <input type="text" name="name" value="{{$form->name}}">
+  <input type="hidden" name="id" value="{{$prefecture->id}}">
+  <input type="text" name="name" value="{{$prefecture->name}}">
   {{-- 既存の登録内容がinputタグに入っている状態にしたい --}}
   <input type="submit" value="更新">
 </form>

@@ -8,7 +8,7 @@
       </ul>
     </div>
 @endif
-<form action="/home/prefecture/add" method="POST">
+<form action="{{route('prefecture_add')}}" method="POST">
   @csrf
   <input type="text" name="name" value="{{old('name')}}">
   <input type="submit" value="追加">
