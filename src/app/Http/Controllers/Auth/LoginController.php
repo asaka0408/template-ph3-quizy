@@ -21,6 +21,9 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    protected $maxAttempts = 4;    
+    protected $decayMinutes = 3; 
+
     /**
      * Where to redirect users after login.
      *
@@ -36,5 +39,11 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function admin()
+    // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
+    {
+      
     }
 }
