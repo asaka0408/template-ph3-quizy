@@ -86,6 +86,21 @@ class HomeController extends Controller
         return view('prefecture_order_change', ['prefectures' => $prefectures]);
     }
 
+    public function order_change(Request $request) {
+        $orderIds = explode(',', $request->listIds);
+        // このネームのデータを取得して、配列に格納
+        foreach($orderIds as $index=>$orderId){
+            // 配列の要素を一つずつ回す
+            $prefecture=Prefecture::find($orderId);
+            // 配列に入ってる要素と同じidのデータを取ってくる
+            $prefecture->order = $index + 1;
+            // そこに配列の順番を入れる
+            $prefecture->save();
+        }
+        return redirect('/home');
+    }
+
+
 
     // 【設問】
     // ■一覧
