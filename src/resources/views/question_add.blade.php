@@ -1,8 +1,10 @@
 <h1>設問追加</h1>
-<form action="submit">
+<form enctype="multipart/form-data" action="{{$prefecture_id}}" method="POST">
+  @csrf
   <p>画像のアップロード</p>
-  <input type="file">
-  <p>選択肢の追加<br>※正解のものにチェックを入れてください</p>
+  <input name="image" type="file" accept="image/*">
+  <p>{{ $prefecture_id }}</p>
+  {{-- <p>選択肢の追加<br>※正解のものにチェックを入れてください</p>
   <ul>
     @for ($i = 0; $i < 3; $i++)
     <li>
@@ -10,5 +12,6 @@
       <input type="radio">
     </li>   
     @endfor
-  </ul>
+  </ul> --}}
+  <input type="submit" value="追加">
 </form>

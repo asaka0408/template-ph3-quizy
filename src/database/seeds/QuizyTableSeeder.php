@@ -30,20 +30,17 @@ class QuizyTableSeeder extends Seeder
           [
               'prefecture_id' => 1,
               'order' => 1,
-              'name' => '高輪',
-              'image' => 'https://d1khcm40x1j0f.cloudfront.net/quiz/34d20397a2a506fe2c1ee636dc011a07.png'
+              'name' => '20220919takanawa.png',
           ],
           [
               'prefecture_id' => 1,
               'order' => 2,
-              'name' => '亀戸',
-              'image' => 'https://d1khcm40x1j0f.cloudfront.net/quiz/512b8146e7661821c45dbb8fefedf731.png'
+              'name' => '20220919kameido.png',
           ],
           [
               'prefecture_id' => 2,
               'order' => 1,
-              'name' => '向洋',
-              'image' => 'https://d1khcm40x1j0f.cloudfront.net/quiz/d876208414d51791af9700a0389b988b.png'
+              'name' => '20220919mukainada.png',
           ],
         ];
         foreach($question_params as $question_param) {

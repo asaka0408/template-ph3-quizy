@@ -52,7 +52,7 @@ class HomeController extends Controller
     // ■編集
     public function prefecture_edit(Request $request)
     {
-        $id = $request->id;
+        $prefecture_id = $request->id;
         $prefecture = Prefecture::find($request->id);
         return view('prefecture_edit', ['prefecture' => $prefecture]);
     }
@@ -69,8 +69,8 @@ class HomeController extends Controller
     // ■削除
     public function prefecture_delete(Request $request)
     {
-        $id = $request->id;
-        $prefecture = Prefecture::find($id);
+        $prefecture_id = $request->id;
+        $prefecture = Prefecture::find($prefecture_id);
         return view('prefecture_delete', ['prefecture' => $prefecture]);
     }
     public function prefecture_remove(Request $request)
@@ -106,36 +106,53 @@ class HomeController extends Controller
     // ■一覧
     public function question(Request $request)
     {
-        $id = $request->id;
-        $prefecture = Prefecture::find($id);
-        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        $prefecture_id = $request->prefecture_id;
+        $prefecture = Prefecture::find($prefecture_id);
+        $questions = Question::where('prefecture_id', $prefecture_id)->with("choices")->get();
         return view('question', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
 
     // ■追加
     public function question_add(Request $request)
     {
-        $id = $request->id;
-        $prefecture = Prefecture::find($id);
-        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
-        return view('question_add', ['prefecture' => $prefecture], ['questions' => $questions]);
+        $prefecture_id = $request->prefecture_id;
+        $prefecture = Prefecture::find($prefecture_id);
+        $questions = Question::where('prefecture_id', $prefecture_id)->with("choices")->get();
+        return view('question_add',['prefecture_id' => $prefecture_id], ['prefecture' => $prefecture], ['questions' => $questions]);
+    }
+    public function question_add_post(Request $request, $prefecture_id)
+    {
+        $prefecture = Prefecture::find($prefecture_id);
+        $file = $_FILES['image'];
+        $filename = basename($file['name']);
+        $path = public_path('image');
+        $upload_dir = $path . '/';
+        $save_filename = date('YmdHis') . $filename;
+        $tmp_path = $file['tmp_name'];
+        move_uploaded_file($tmp_path, $upload_dir . $save_filename);
+        Question::insert([
+            'prefecture_id' => $prefecture_id,
+            'name' => $save_filename,
+            'order' => 10,          
+        ]);
+        return view('question_add', ['prefecture' => $prefecture],['prefecture_id' => $prefecture_id], ['msg' => '正しく入力されました！']);
     }
 
     // ■編集
     public function question_edit(Request $request)
     {
-        $id = $request->id;
-        $prefecture = Prefecture::find($id);
-        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        $prefecture_id = $request->id;
+        $prefecture = Prefecture::find($prefecture_id);
+        $questions = Question::where('prefecture_id', $prefecture_id)->with("choices")->get();
         return view('question_edit', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
 
     // ■削除
     public function question_delete(Request $request)
     {
-        $id = $request->id;
-        $prefecture = Prefecture::find($id);
-        $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+        $prefecture_id = $request->id;
+        $prefecture = Prefecture::find($prefecture_id);
+        $questions = Question::where('prefecture_id', $prefecture_id)->with("choices")->get();
         return view('question_delete', ['prefecture' => $prefecture], ['questions' => $questions]);
     }
 }
