@@ -12,7 +12,7 @@
   @csrf
     <ul class="sortable">
        @foreach($prefectures as $prefecture)
-        <li id="{{ $prefecture['id'] }}">{{ $prefecture['name'] }}</li>
+        <li id="{{ $prefecture->id}}">{{ $prefecture->name }}</li>
        @endforeach
      </ul>
     <input type="hidden" id="list-ids" name="listIds" />

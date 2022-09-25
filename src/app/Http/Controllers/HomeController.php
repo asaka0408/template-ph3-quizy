@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Prefecture;
 use App\Question;
+use App\Choice;
 use Illuminate\Foundation\Console\Presets\React;
 
 class HomeController extends Controller
@@ -52,14 +53,14 @@ class HomeController extends Controller
     // ■編集
     public function prefecture_edit(Request $request)
     {
-        $prefecture_id = $request->id;
-        $prefecture = Prefecture::find($request->id);
+        $prefecture_id = $request->prefecture_id;
+        $prefecture = Prefecture::find($request->prefecture_id);
         return view('prefecture_edit', ['prefecture' => $prefecture]);
     }
     public function prefecture_update(Request $request)
     {
         $this->validate($request, Prefecture::$rules);
-        $prefecture = Prefecture::find($request->id);
+        $prefecture = Prefecture::find($request->prefecture_id);
         $form = $request->all();
         unset($form['_token']);
         $prefecture->fill($form)->save();
@@ -69,13 +70,13 @@ class HomeController extends Controller
     // ■削除
     public function prefecture_delete(Request $request)
     {
-        $prefecture_id = $request->id;
+        $prefecture_id = $request->prefecture_id;
         $prefecture = Prefecture::find($prefecture_id);
         return view('prefecture_delete', ['prefecture' => $prefecture]);
     }
     public function prefecture_remove(Request $request)
     {
-        Prefecture::find($request->id)->delete();
+        Prefecture::find($request->prefecture_id)->delete();
         return redirect('/home');
     }
 
@@ -130,11 +131,32 @@ class HomeController extends Controller
         $save_filename = date('YmdHis') . $filename;
         $tmp_path = $file['tmp_name'];
         move_uploaded_file($tmp_path, $upload_dir . $save_filename);
-        Question::insert([
+        $question = Question::create([ 
             'prefecture_id' => $prefecture_id,
+            'order' => 10,
             'name' => $save_filename,
-            'order' => 10,          
         ]);
+        $choices = $request->choice_name;
+
+
+
+        foreach($choices as $index => $choice) {
+            if(isset($request['valid' . $index])) {
+                $valid = 1;
+            } else {
+                $valid = 0;
+            }
+            Choice::insert([
+                'question_id' => $question->id, 
+                'name' =>$choice,
+                'valid' => $valid,
+            ]
+            ); 
+        }
+
+
+
+       
         return view('question_add', ['prefecture' => $prefecture],['prefecture_id' => $prefecture_id], ['msg' => '正しく入力されました！']);
     }
 
