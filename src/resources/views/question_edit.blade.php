@@ -1,4 +1,4 @@
-<h1>設問追加</h1>
+<h1>設問編集</h1>
 @if (count($errors) > 0)
     <div>
         <ul>
@@ -8,20 +8,24 @@
         </ul>
     </div>
 @endif
-<form action="/home" method="POST">
-    <input type="hidden" name="id" value="{{ $form->id }}">
-    <p>画像のアップロード</p>
-    <input type="file">
-    <p>選択肢の追加<br>※正解のものにチェックを入れてください</p>
+
+<h1></h1>
+<form action="/home/question_edit/{{$prefecture->id}}/{{$question->id}}" method="POST">
+    @csrf
+    <input type="hidden" name="prefecture_id" value="{{ $prefecture->id }}">
+    <input type="hidden" name="question_id" value="{{ $question->id }}">
+    <p>選択肢の編集<br>※正解のものにチェックを入れてください</p>
     <ul>
-        @for ($i = 0; $i < 3; $i++)
+        @foreach($choices as $index => $choice)
             <li>
-                <input type="text">
-                <input type="radio">
+                <input type="text" name="choice_name[]" value="{{$choice->name}}">
+                {{-- <input type="radio" name="valid{{$index}}"> --}}
             </li>
-        @endfor
+        @endforeach
     </ul>
+    <input type="submit" value="更新">
 </form>
+{{$question->name}}
 
 <a href="{{ route('question_delete') }}">削除</a>
 

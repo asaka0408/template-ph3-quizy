@@ -50,6 +50,8 @@ Route::get('/home/question/{prefecture_id}', 'HomeController@question')->name('q
 Route::get('/home/question_add/{prefecture_id}', 'HomeController@question_add')->name('question_add');
 Route::post('/home/question_add/{prefecture_id}', 'HomeController@question_add_post')->name('question_add');
 // ■設問編集
-Route::get('/home/question_edit', 'HomeController@question_edit')->name('question_edit');
+Route::get('/home/question_edit/{prefecture_id}/{question_id}', 'HomeController@question_edit')->name('question_edit');
+Route::post('/home/question_edit/{prefecture_id}/{question_id}', 'HomeController@question_update')->name('question_edit');
+
 // ■設問削除
 Route::get('/home/question_delete', 'HomeController@question_delete')->name('question_delete');
