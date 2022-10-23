@@ -17,6 +17,7 @@ class CreateQuizyTable extends Migration
     {
         Schema::create('prefectures', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('order');
             $table->string('name');
             $table->timestamps();
         });
@@ -25,8 +26,8 @@ class CreateQuizyTable extends Migration
             // 問題番号に対応させる
             $table->bigIncrements('id');
             $table->integer('prefecture_id');
-            $table->string('name');
-            $table->string('image');
+            $table->integer('order');
+            $table->string('name')->unique();
             $table->timestamps();
         });
 

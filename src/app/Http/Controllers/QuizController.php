@@ -18,9 +18,9 @@ class QuizController extends Controller
     public function quiz_contents(Request $request)
     // それのなかの＠の後の、このオブジェクトって決まってるやつを呼び出す
     {
-      $id = $request->id;
-      $prefecture = Prefecture::find($id);
-      $questions = Question::where('prefecture_id', $id)->with("choices")->get();
+      $prefecture_id = $request->prefecture_id;
+      $prefecture = Prefecture::find($prefecture_id);
+      $questions = Question::where('prefecture_id', $prefecture_id)->with("choices")->get();
       // _φ(･_･モデルって1個取り出してきて、この子の性質は？って感じだから、単数形
       // 集合ではなく、単体の性質
       // withの中にある変数はモデルの関数名
